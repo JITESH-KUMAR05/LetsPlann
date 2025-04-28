@@ -11,7 +11,6 @@ connectDB();
 
 const app = express();
 
-// Updated CORS configuration
 app.use(cors({
   origin: ['https://lets-plann.vercel.app', 'http://localhost:5173'],
   credentials: true,

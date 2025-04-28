@@ -7,12 +7,10 @@ const authUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-      // Generate token
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
       });
       
-      // Set cookie (still useful for same-site requests)
       res.cookie('jwt', token, {
         httpOnly: true,
         secure: true, 
@@ -20,7 +18,7 @@ const authUser = async (req, res) => {
         maxAge: 30 * 24 * 60 * 60 * 1000,
       });
 
-      // Return token in response body for localStorage
+     
       res.json({
         _id: user._id,
         name: user.name,
@@ -51,7 +49,6 @@ const registerUser = async (req, res) => {
     });
 
     if (user) {
-      // Generate token
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
       });
@@ -68,7 +65,7 @@ const registerUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        token: token // Send token to client
+        token: token
       });
     } else {
       res.status(400).json({ message: 'Invalid user data' });
