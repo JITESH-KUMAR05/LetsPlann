@@ -5,7 +5,7 @@ const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const api = axios.create({
   baseURL,
-  withCredentials: true,
+  withCredentials: true, // Still attempt to send cookies
 });
 
 api.interceptors.request.use(
@@ -13,8 +13,9 @@ api.interceptors.request.use(
     const userInfo = localStorage.getItem('userInfo');
     if (userInfo) {
       const user = JSON.parse(userInfo);
-      if (user._id) {
-        config.headers.Authorization = `Bearer ${user._id}`;
+      // Use the actual JWT token, not the user ID
+      if (user.token) {
+        config.headers.Authorization = `Bearer ${user.token}`;
       }
     }
     return config;

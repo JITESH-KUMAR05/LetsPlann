@@ -27,9 +27,14 @@ const AuthProvider = ({ children }) => {
     try {
       const { data } = await api.post('/api/users/login', { email, password });
       
+      // Store user data
       setUser(data);
       
-      localStorage.setItem('userInfo', JSON.stringify(data));
+      // Make sure we're storing the FULL user object with JWT token
+      localStorage.setItem('userInfo', JSON.stringify({
+        ...data,
+        token: data.token  // Store token if it's returned from backend
+      }));
       
       return { success: true };
     } catch (error) {

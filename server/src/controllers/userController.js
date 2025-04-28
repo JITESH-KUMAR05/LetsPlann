@@ -1,31 +1,31 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
-const generateToken = (res, userId) => {
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
-    expiresIn: '30d',
-  });
-
-  res.cookie('jwt', token, {
-    httpOnly: true,
-    secure: true, 
-    sameSite: 'none', // Required for cross-origin cookies
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  });
-};
-
 const authUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-      generateToken(res, user._id);
+      // Generate token
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+      });
+      
+      // Set cookie (still useful for same-site requests)
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        secure: true, 
+        sameSite: 'none',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
 
+      // Return token in response body for localStorage
       res.json({
         _id: user._id,
         name: user.name,
         email: user.email,
+        token: token // Send token to client
       });
     } else {
       res.status(401).json({ message: 'Invalid email or password' });
@@ -51,12 +51,24 @@ const registerUser = async (req, res) => {
     });
 
     if (user) {
-      generateToken(res, user._id);
+      // Generate token
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+      });
+      
+      // Set cookie
+      res.cookie('jwt', token, {
+        httpOnly: true,
+        secure: true, 
+        sameSite: 'none',
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+      });
 
       res.status(201).json({
         _id: user._id,
         name: user.name,
         email: user.email,
+        token: token // Send token to client
       });
     } else {
       res.status(400).json({ message: 'Invalid user data' });
