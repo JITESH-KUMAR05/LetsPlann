@@ -15,7 +15,14 @@ Setup Instructions
 1. Clone the Repository
 git clone https://github.com/JITESH-KUMAR05/LetsPlann.git
 cd LetsPlann
+# Navigate to project directory after cloning
+cd LetsPlann
 
+# Install all dependencies
+npm install
+
+# If you're using yarn
+# yarn install
 2. Frontend Setup
 # Install frontend dependencies
 npm install
