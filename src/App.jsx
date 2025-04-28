@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthProvider from './context/AuthContext';
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './Components/PrivateRoute';
 import Navbar from './Components/Navbar';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
