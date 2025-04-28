@@ -1,18 +1,24 @@
 import React from 'react';
 
-const Navbar = () => {
-  return (
-    <nav className="flex justify-around bg-slate-700 text-white py-2">
-      <div className="logo">
-        <span className='font-bold lg:text-xl md:text-lg'>JK's Planner</span>
+const Navbar = () => (
+  <nav className="bg-purple-700 text-white shadow-lg">
+    <div className="container mx-auto px-4">
+      <div className="flex justify-between items-center py-4">
+        <div>
+          <h1 className="text-xl font-bold">JK's Planner</h1>
+        </div>
+        <ul className="flex space-x-6">
+          {['Home', 'About', 'Contact'].map(label => (
+            <li key={label} className="hover:text-purple-200 transition-colors">
+              <a href="#" className="focus:outline-none focus:underline">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className='flex gap-8 mx-10'>
-        <li className='hover:font-bold transition-all duration-500'><a href="#">Home</a></li>
-        <li className='hover:font-bold transition-all duration-500'><a href="#">About</a></li>
-        <li className='hover:font-bold transition-all duration-500'><a href="#">Contact</a></li>
-      </ul>
-    </nav>
-  );
-};
+    </div>
+  </nav>
+);
 
 export default Navbar;
