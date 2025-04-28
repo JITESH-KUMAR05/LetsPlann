@@ -12,6 +12,9 @@ import CreateTodoScreen from './screens/CreateTodoScreen';
 import EditTodoScreen from './screens/EditTodoScreen';
 import './App.css';
 
+// Add this near the top to debug
+console.log('API URL:', import.meta.env.VITE_API_URL || 'using fallback');
+
 function App() {
   return (
     <Router>

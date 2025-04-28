@@ -1,8 +1,5 @@
 const Todo = require('../models/todoModel');
 
-// @desc    Get all todos for a user
-// @route   GET /api/todos
-// @access  Private
 const getTodos = async (req, res) => {
   try {
     const todos = await Todo.find({ user: req.user._id });
@@ -11,10 +8,6 @@ const getTodos = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Create a todo
-// @route   POST /api/todos
-// @access  Private
 const createTodo = async (req, res) => {
   try {
     const { title, description, deadline, priority } = req.body;
@@ -33,10 +26,6 @@ const createTodo = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
-
-// @desc    Get todo by ID
-// @route   GET /api/todos/:id
-// @access  Private
 const getTodoById = async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
@@ -50,10 +39,6 @@ const getTodoById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Update a todo
-// @route   PUT /api/todos/:id
-// @access  Private
 const updateTodo = async (req, res) => {
   try {
     const { title, description, isCompleted, deadline, priority } = req.body;
@@ -76,10 +61,6 @@ const updateTodo = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// @desc    Delete a todo
-// @route   DELETE /api/todos/:id
-// @access  Private
 const deleteTodo = async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id);
