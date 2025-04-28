@@ -26,7 +26,11 @@ const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const { data } = await api.post('/api/users/login', { email, password });
+      
       setUser(data);
+      
+      localStorage.setItem('userInfo', JSON.stringify(data));
+      
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);

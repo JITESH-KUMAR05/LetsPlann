@@ -6,10 +6,9 @@ const generateToken = (res, userId) => {
     expiresIn: '30d',
   });
 
-  // Updated cookie settings for cross-origin
   res.cookie('jwt', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV !== 'development', // Use secure in production
+    secure: true, 
     sameSite: 'none', // Required for cross-origin cookies
     maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
   });

@@ -8,4 +8,18 @@ const api = axios.create({
   withCredentials: true,
 });
 
+api.interceptors.request.use(
+  (config) => {
+    const userInfo = localStorage.getItem('userInfo');
+    if (userInfo) {
+      const user = JSON.parse(userInfo);
+      if (user._id) {
+        config.headers.Authorization = `Bearer ${user._id}`;
+      }
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
 export default api;
