@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaPlus } from 'react-icons/fa';
-import TodoItem from '../components/TodoItem';
-import TodoFilter from '../components/TodoFilter';
+import TodoItem from '../Components/TodoItem';
+import TodoFilter from '../Components/TodoFilter';
 import { getTodos, updateTodo, deleteTodo } from '../services/todoApi';
 
 const HomeScreen = () => {

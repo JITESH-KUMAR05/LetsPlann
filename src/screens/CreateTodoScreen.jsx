@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { createTodo } from '../services/todoApi';
-import TodoForm from '../components/TodoForm';
+import TodoForm from '../Components/TodoForm';
 
 const CreateTodoScreen = () => {
   const navigate = useNavigate();

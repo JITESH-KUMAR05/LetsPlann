@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getTodoById, updateTodo } from '../services/todoApi';
-import TodoForm from '../components/TodoForm';
+import TodoForm from '../Components/TodoForm';
 
 const EditTodoScreen = () => {
   const { id } = useParams();
